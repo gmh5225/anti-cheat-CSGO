@@ -20,7 +20,7 @@ def read_json_file(input_path):
 if __name__ == "__main__":
 
     match_ids = []
-    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\match_details.json"
+    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\database_generator\\match_details.json"
     data = read_json_file(input_path)
 
     for i in range(0, len(data)):

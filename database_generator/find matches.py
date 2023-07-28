@@ -37,7 +37,7 @@ if __name__ == "__main__":
         # Clean up the JSON response for better viewing
         formatted_json = json.dumps(match_details, indent=2)
 
-        output_path = r"C:\\Users\\bhatn\\Desktop\\anticheat"
+        output_path = r"C:\\Users\\bhatn\\Desktop\\anticheat\\database_generator"
         # Create the directory if it doesn't exist
         os.makedirs(output_path, exist_ok=True)
 

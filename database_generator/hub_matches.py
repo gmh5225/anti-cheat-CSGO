@@ -50,7 +50,7 @@ if __name__ == "__main__":
     faceit_api_key = config.get('API_KEYS', 'api_key_1')
 
     # PATH TO hub_details JSON FILE
-    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\hub_details.json"
+    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\database_generator\\hub_details.json"
 
     hub_ids = []
     hub_data = read_json_file(input_path)

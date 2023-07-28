@@ -58,7 +58,7 @@ if __name__ == "__main__":
     faceit_api_key = config.get('API_KEYS', 'api_key_1')
 
     # path to match_details text file
-    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\match_ids.txt"
+    input_path = "D:\\faceit_demos"
 
     # function to read match_ids from math_ids.txt
     data = read_json_file(input_path)
