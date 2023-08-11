@@ -1,1 +1,6 @@
-/anticheat/database_generator/configure.ini
+/anticheat/src/data_collection/configure.ini
+/anticheat/src/demo_parser/config.ini
+/anticheat/.vscode
+/anticheat/src/data_collection/.vscode
+/anticheat/src/data_processing/.vscode
+/anticheat/src/data_collection/hub_details.py

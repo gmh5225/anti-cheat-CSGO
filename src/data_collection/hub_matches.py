@@ -44,17 +44,19 @@ def write_json_to_file(data, filename):
 
 if __name__ == "__main__":
 
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(base_dir)
+
     # use faceit open API key
-    config =  configparser.ConfigParser()
+    config = configparser.ConfigParser()
     config.read('config.ini')
     faceit_api_key = config.get('API_KEYS', 'api_key_1')
-
+    print(faceit_api_key)
     # PATH TO hub_details JSON FILE
-    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\database_generator\\hub_details.json"
+    input_path = config.get('PATHS', 'hub_matches_input')
 
     hub_ids = []
     hub_data = read_json_file(input_path)
-
     match_details = get_hub_matches(faceit_api_key, hub_data)
 
     if match_details:
@@ -62,7 +64,7 @@ if __name__ == "__main__":
         formatted_json = json.dumps(match_details, indent=2)
 
         # Specify path of output json file
-        output_path = r"C:\\Users\\bhatn\\Desktop\\anticheat"
+        output_path = config.get('PATHS', 'hub_matches_output')
         # Create the directory if it doesn't exist
         os.makedirs(output_path, exist_ok=True)
 

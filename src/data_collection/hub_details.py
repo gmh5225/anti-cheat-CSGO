@@ -29,7 +29,7 @@ def write_json_to_file(data, filename):
 if __name__ == "__main__":
 
     # Read the config file
-    config =  configparser.ConfigParser()
+    config = configparser.ConfigParser()
     config.read('config.ini')
     faceit_api_key = config.get('API_KEYS', 'api_key_1')
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         # Clean up the JSON response for better viewing
         formatted_json = json.dumps(hub_details, indent=2)
 
-        output_path = r"C:\\Users\\bhatn\\Desktop\\anticheat\\database_generator"
+        output_path = r"C:\\Users\\bhatn\\Desktop\\anticheat\\src\\data_collection"
         # Create the directory if it doesn't exist
         os.makedirs(output_path, exist_ok=True)
 

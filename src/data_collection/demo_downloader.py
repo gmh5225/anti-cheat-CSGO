@@ -2,6 +2,9 @@ import requests
 import json
 import re
 import configparser
+import os
+
+# Function to download the demo (.dem) file
 
 
 def download_demo(url, save_path):
@@ -17,6 +20,8 @@ def download_demo(url, save_path):
     except requests.exceptions.RequestException as e:
         print(f"Error downloading the demo: {e}")
 
+# Function to read the match_id from the text file
+
 
 def read_json_file(input_path):
     with open(input_path, 'r', encoding='utf-8') as file:
@@ -27,6 +32,8 @@ def read_json_file(input_path):
         pattern = r'"([a-zA-Z0-9-]+)"'
         data_clean = re.findall(pattern, data)
     return data_clean
+
+# Function to get the match details
 
 
 def get_match_details(api_key, match_id):
@@ -44,6 +51,8 @@ def get_match_details(api_key, match_id):
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
+# Function to write the match details to a json file
+
 
 def write_json_to_file(data, filename):
     with open(filename, 'w') as file:
@@ -52,24 +61,36 @@ def write_json_to_file(data, filename):
 
 
 if __name__ == "__main__":
-    # Replace 'YOUR_FACEIT_API_KEY' with your actual Faceit API key
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(base_dir)
+
     config = configparser.ConfigParser()
     config.read('config.ini')
+
+    # Replace with your actual Faceit API key from https://developers.faceit.com/
     faceit_api_key = config.get('API_KEYS', 'api_key_1')
 
     # path to match_details text file
-    input_path = "C:\\Users\\bhatn\\Desktop\\anticheat\\database_generator\\match_ids.txt"
-    # function to read match_ids from math_ids.txt
-    data = read_json_file(input_path)
+    downloader_input = config.get('PATHS', 'downloader_input')
+
+    # path to save the demo files
+    save_path_base = config.get('PATHS', 'save_path')
+
+    # Read match_ids from match_ids.txt
+    data = read_json_file(downloader_input)
     dnum = 0
     for match_id in data:
 
+        # Retrive match details for each match_id
         details = get_match_details(faceit_api_key, match_id)
         urls = details['demo_url']
         dnum += 1
-
+        if dnum == 2:
+            break
+        # Retrive a demo file for each url in match_details
         for url in urls:
 
             # Change this to your desired save path
-            save_path = f"C:\\Users\\bhatn\\Desktop\\faceit_demos\\demo{dnum}.dem.gz"
+            save_path = os.path.join(save_path_base, f"demo{dnum}.dem.gz")
             download_demo(url, save_path)
